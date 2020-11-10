@@ -11,14 +11,13 @@ import java.io.IOException;
 public class FileHandler {
     @Getter
     private SaveFile saveFile = new SaveFile();
-    private File saveFileLocation = new File("data.json");
+    private final File saveFileLocation = new File("data.json");
 
     public FileHandler() throws IOException {
         if (saveFileLocation.exists()) {
             val objectMapper = new ObjectMapper();
             saveFile = objectMapper.readValue(saveFileLocation, SaveFile.class);
         } else {
-            saveFileLocation.createNewFile();
             save();
         }
 

@@ -1,7 +1,5 @@
 package at.jesus.goava.util;
 
-import java.util.concurrent.TimeUnit;
-
 public class Timer {
     private long lastMS;
 

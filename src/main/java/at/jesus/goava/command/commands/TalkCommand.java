@@ -12,7 +12,7 @@ import lombok.val;
 @CommandData(names = {"talk", "t"}, syntax = "talk <start/stop>")
 public class TalkCommand extends Command {
     private TalkType currentType = TalkType.STOP;
-    private Timer timer = new Timer();
+    private final Timer timer = new Timer();
 
     @Override
     public void execute(MessageChannel channel, String[] args) {
@@ -26,7 +26,7 @@ public class TalkCommand extends Command {
             switch (type) {
                 case START:
                     if (currentType.equals(TalkType.START))
-                        sendChatMessage(channel,"Er redet bereits seit %s :)", timer.format());
+                        sendChatMessage(channel, "Er redet bereits seit %s :)", timer.format());
                     else {
                         timer.start();
 
@@ -45,7 +45,7 @@ public class TalkCommand extends Command {
                     break;
                 case STOP:
                     if (currentType.equals(TalkType.STOP))
-                        sendChatMessage(channel,"Er redet gar nicht?!");
+                        sendChatMessage(channel, "Er redet gar nicht?!");
                     else {
                         val total = Goava.INSTANCE.getFileHandler().getSaveFile().addTime(timer.getDifference());
                         sendChatMessage(channel, "Er hat nach %s aufgehört zu reden! (insgesamt: %s)", timer.format(), FormatUtil.msToString(total));
@@ -60,6 +60,6 @@ public class TalkCommand extends Command {
     }
 
     enum TalkType {
-        START, STOP;
+        START, STOP
     }
 }
